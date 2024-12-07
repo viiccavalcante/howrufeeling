@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: sans-serif;
     }
 `;
+
 const Card = styled.div`
     position: absolute;  
     top: 50%;          
@@ -26,7 +27,6 @@ const Title = styled.h1`
   color: #96add6;
 `;
 
-//#577c8e;
 const Button = styled.button`
     background: white;
     font-weight: bold;
@@ -47,6 +47,5 @@ const Button = styled.button`
         color: white;
     }
 `;
-
 
 export  {GlobalStyle, Card, Title, Button};

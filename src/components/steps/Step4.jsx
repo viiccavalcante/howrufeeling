@@ -1,23 +1,30 @@
-//colocar uma animação na palavra 
 import { styled } from "styled-components";
+import { motion } from "framer-motion";
+
+const Container = styled(motion.div)` 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: #96add6;
+  border-radius: 50%; 
+`;
 
 const Result = styled.h1`
-  font-size: 2.5rem;
-  color: #96add6;
+  font-size: 3rem;
+  color: white;
 `;
-
-const Container = styled.div` 
-  justify-content: center;
-`;
-
 
 const Step4 = ({selectedFeeling}) => {
   return (
-    <Container>
+    <Container
+      initial={{ opacity: 0, scale: 0.9 }} 
+      animate={{ opacity: 1, scale: 1 }} 
+      transition={{ duration: 1.6, ease: "easeOut" }}
+    >
       <Result>{selectedFeeling}</Result>
     </Container>
   );
 };
   
 export default Step4;
-  

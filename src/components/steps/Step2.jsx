@@ -1,8 +1,10 @@
 import { Title, Button } from "../GlobalStyle";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-const Feeling = styled.h2`
+const Feeling = styled(motion.h2)`
   color: #577c8e;
+  margin: 5px 0;
 `;
 
 const ScrollDiv = styled.div`
@@ -20,8 +22,15 @@ const Step2  = ({ selectedFeelings, onNext }) => {
     <>
       <Title>You may be feeling:</Title>
       <ScrollDiv>
-        {selectedFeelings.map((feeling) => (
-          <Feeling>{feeling}</Feeling>
+        {selectedFeelings.map((feeling, index) => (
+          <Feeling
+            key={feeling}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: index * 0.3, duration: 0.6 }}
+          >
+            {feeling}
+          </Feeling>
         ))}
       </ScrollDiv>
       <Button onClick={onNext}>Next</Button>

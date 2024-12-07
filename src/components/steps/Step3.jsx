@@ -1,6 +1,6 @@
-//colocar animação quando selecionar, talvez colocar tempo
 import { useState, useEffect } from "react";
 import { styled } from "styled-components";
+import { motion } from "framer-motion";
 
 const DivThisOrThat = styled.div`
   display: flex;
@@ -8,8 +8,8 @@ const DivThisOrThat = styled.div`
   height: 100%;
 `;
 
-const LeftFeeling = styled.div`
-     flex: 1; 
+const LeftFeeling = styled(motion.div)`
+  flex: 1; 
   background: white;
   display: flex;
   align-items: center;
@@ -19,7 +19,7 @@ const LeftFeeling = styled.div`
   padding: 20px; 
 `;
 
-const RightFeeling = styled.div`
+const RightFeeling = styled(motion.div)`
   flex: 1;
   background: #96add6; 
   display: flex;
@@ -48,10 +48,18 @@ const Step3 = ({selectedFeelings, thisOrThat}) => {
   return (
     <>
       <DivThisOrThat>
-        <LeftFeeling onClick={() => thisOrThat(rightFeeling)}>
+        <LeftFeeling onClick={() => thisOrThat(rightFeeling)}
+          whileHover={{
+            scale: 1.05,
+            transition: { duration: 0.5 },
+          }}>
           <Option>{leftFeeling}</Option>
         </LeftFeeling>
-        <RightFeeling onClick={() => thisOrThat(leftFeeling)}>
+        <RightFeeling onClick={() => thisOrThat(leftFeeling)}
+          whileHover={{
+            scale: 1.05,
+            transition: { duration: 0.5 },
+          }}>
           <Option>{rightFeeling}</Option>
         </RightFeeling>
       </DivThisOrThat>

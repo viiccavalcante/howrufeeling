@@ -24,77 +24,72 @@ const App = () => {
       if(currentStep === 1){
         setCurrentStep(2);
       }
+      
       if(selectedFeelings.length === 1){
         setCurrentStep(4);
       }
-     
     }
-
   }, [activeFeelings, selectedFeelings]);
 
   const nextStep = () => {
     setCurrentStep((prevStep) => Math.min(prevStep + 1, 5));
   };
+    
+  const generateFeeling = () => {
+    const position = Math.floor(Math.random() * activeFeelings.length);
+    setCurrentFeeling(activeFeelings[position]);
+  };
 
-  /////
-  //tirar o nome "feeling" na frente de todos os metodos
-    const generateFeeling = () => {
-      const position = Math.floor(Math.random() * activeFeelings.length);
-      setCurrentFeeling(activeFeelings[position]);
-    };
+  const removeFeeling = () => {
+    setActiveFeelings(activeFeelings.filter(item => item !== currentFeeling));
+  };
 
-    const removeFeeling = () => {
-      setActiveFeelings(activeFeelings.filter(item => item !== currentFeeling));
-    };
+  const select = () => {
+    setSelectedFeelings([...selectedFeelings, currentFeeling]); 
+    removeFeeling();
+    generateFeeling();
+  };
 
-    const select = () => {
-      setSelectedFeelings([...selectedFeelings, currentFeeling]); 
-      removeFeeling();
-      generateFeeling();
-    };
+  const discard = () => {
+    removeFeeling();
+    generateFeeling();
+  };
 
-    const discard = () => {
-      removeFeeling();
-      generateFeeling();
-    };
+  const reconsider = () => {
+    generateFeeling();
+  };
 
-    const reconsider = () => {
-      generateFeeling();
-    };
-
-    const thisOrThat = (discardedFeeling) =>{
-      console.log(discardedFeeling);
-      setSelectedFeelings(selectedFeelings.filter(item => item !== discardedFeeling));
-    };
+  const thisOrThat = (discardedFeeling) =>{
+    setSelectedFeelings(selectedFeelings.filter(item => item !== discardedFeeling));
+  };
 
     //console.log(activeFeelings);
     console.log(selectedFeelings);
-    const renderStep = () => {
-      switch (currentStep) {
-        case 2:
-          return <Step2 onNext={nextStep} selectedFeelings={selectedFeelings} />;
-        case 3:
-          return <Step3 selectedFeelings={selectedFeelings} thisOrThat={thisOrThat}/>;
-        case 4:
-          return <Step4 selectedFeeling={selectedFeelings}/>;
-        default:
-          return (
-            <Step1
-              currentFeeling={currentFeeling}
-              select={select}
-              discard={discard}
-              reconsider={reconsider}
-            />
-          );
-      }
-    };
+  const renderStep = () => {
+    switch (currentStep) {
+      case 2:
+        return <Step2 onNext={nextStep} selectedFeelings={selectedFeelings} />;
+      case 3:
+        return <Step3 selectedFeelings={selectedFeelings} thisOrThat={thisOrThat}/>;
+      case 4:
+        return <Step4 selectedFeeling={selectedFeelings}/>;
+      default:
+        return (
+          <Step1
+            currentFeeling={currentFeeling}
+            select={select}
+            discard={discard}
+            reconsider={reconsider}
+          />
+        );
+    }
+  };
     
-
   return (
     <>
-    <GlobalStyle />
-    <Card>
-      {renderStep()}
+      <GlobalStyle />
+      <Card>
+        {renderStep()}
       </Card>
     </>
   );
