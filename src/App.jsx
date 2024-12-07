@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
-import Step1 from "./components/Step1";
-import Step2 from "./components/Step2";
-import Step3 from "./components/Step3";
-import Step4 from "./components/Step4";
+import {
+  GlobalStyle,
+  Card,
+  Step1,
+  Step2,
+  Step3,
+  Step4,
+} from "./components";
 
 const App = () => {
   const feelings =["Joy", "Excitement", "Love", "Gratitude", "Contentment",
@@ -14,7 +18,6 @@ const App = () => {
   const [selectedFeelings, setSelectedFeelings] = useState([]);
   const [activeFeelings, setActiveFeelings] = useState(feelings);
   const [currentFeeling, setCurrentFeeling] = useState(activeFeelings[0]);
-  ///const [discardedFeeling, setDiscardedFeeling] = useState('');
 
   useEffect(() => {
     if (activeFeelings.length === 0 ) {
@@ -89,12 +92,10 @@ const App = () => {
 
   return (
     <>
-    <div>
+    <GlobalStyle />
+    <Card>
       {renderStep()}
-    </div>
-  
-       
-
+      </Card>
     </>
   );
 };

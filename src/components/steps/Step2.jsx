@@ -1,4 +1,6 @@
+import { Title, Button } from "../GlobalStyle";
 ///import styled from "styled-components";
+
 
 const Feeling = ({ feeling }) => (
     <p>{feeling}</p>
@@ -7,7 +9,7 @@ const Feeling = ({ feeling }) => (
 const Step2  = ({ selectedFeelings, onNext }) => {
     return (
         <>
-          <h1>You may be feeling:</h1>
+          <Title>You may be feeling:</Title>
           <div>
           {selectedFeelings.map((feeling) => (
             <Feeling key={feeling.id} feeling={feeling} />
