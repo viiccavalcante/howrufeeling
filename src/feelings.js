@@ -1,0 +1,11 @@
+const feelings =["Joy", "Excitement", "Love", "Gratitude", "Contentment",
+    "Pride", "Hope", "Curiosity", "Peace", "Inspiration",
+    "Confidence", "Enthusiasm", "Relief", "Amusement",
+    "Awe", "Optimism", "Compassion", "Satisfaction",
+    "Trust", "Serenity", "Anger", "Sadness", "Fear",
+    "Guilt", "Shame", "Disappointment", "Frustration",
+    "Anxiety", "Loneliness", "Jealousy", "Envy",
+    "Resentment", "Embarrassment", "Despair", "Grief",
+    "Helplessness", "Regret", "Vulnerability", "Overwhelm", "Bitterness",
+    "Nostalgia", "Confusion", "Anticipation", "Surprise", "Indifference", "Yearning",
+    "Suspense", "Longing", "Restlessness","Melancholy"];

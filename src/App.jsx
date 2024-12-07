@@ -1,24 +1,40 @@
 import { useState, useEffect } from "react";
-import ListSelected from "./pages/ListSelected";
+import Step1 from "./components/Step1";
+import Step2 from "./components/Step2";
+import Step3 from "./components/Step3";
+import Step4 from "./components/Step4";
 
 const App = () => {
   const feelings =["Joy", "Excitement", "Love", "Gratitude", "Contentment",
     "Pride", "Hope", "Curiosity", "Peace", "Inspiration",
     "Confidence", "Enthusiasm", "Relief", "Amusement",
-    "Awe", "Optimism", "Compassion", "Satisfaction",
-    "Trust", "Serenity", "Anger", "Sadness", "Fear",
-    "Guilt", "Shame", "Disappointment", "Frustration",
-    "Anxiety", "Loneliness", "Jealousy", "Envy",
-    "Resentment", "Embarrassment", "Despair", "Grief",
-    "Helplessness", "Regret", "Vulnerability", "Overwhelm", "Bitterness",
-    "Nostalgia", "Confusion", "Anticipation", "Surprise", "Indifference", "Yearning",
-    "Suspense", "Longing", "Restlessness","Melancholy"];
+    "Awe", "Optimism", "Compassion", "Satisfaction"];
 
-  //const [showListSelected, setShowHListSelected] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
   const [selectedFeelings, setSelectedFeelings] = useState([]);
   const [activeFeelings, setActiveFeelings] = useState(feelings);
   const [currentFeeling, setCurrentFeeling] = useState(activeFeelings[0]);
+  ///const [discardedFeeling, setDiscardedFeeling] = useState('');
 
+  useEffect(() => {
+    if (activeFeelings.length === 0 ) {
+      if(currentStep === 1){
+        setCurrentStep(2);
+      }
+      if(selectedFeelings.length === 1){
+        setCurrentStep(4);
+      }
+     
+    }
+
+  }, [activeFeelings, selectedFeelings]);
+
+  const nextStep = () => {
+    setCurrentStep((prevStep) => Math.min(prevStep + 1, 5));
+  };
+
+  /////
+  //tirar o nome "feeling" na frente de todos os metodos
     const generateFeeling = () => {
       const position = Math.floor(Math.random() * activeFeelings.length);
       setCurrentFeeling(activeFeelings[position]);
@@ -28,35 +44,57 @@ const App = () => {
       setActiveFeelings(activeFeelings.filter(item => item !== currentFeeling));
     };
 
-    const selectFeeling = () => {
+    const select = () => {
       setSelectedFeelings([...selectedFeelings, currentFeeling]); 
       removeFeeling();
       generateFeeling();
     };
 
-    const discardFeeling = () => {
+    const discard = () => {
       removeFeeling();
       generateFeeling();
     };
 
-    const reconsiderFeeling = () => {
+    const reconsider = () => {
       generateFeeling();
     };
 
+    const thisOrThat = (discardedFeeling) =>{
+      console.log(discardedFeeling);
+      setSelectedFeelings(selectedFeelings.filter(item => item !== discardedFeeling));
+    };
+
+    //console.log(activeFeelings);
+    console.log(selectedFeelings);
+    const renderStep = () => {
+      switch (currentStep) {
+        case 2:
+          return <Step2 onNext={nextStep} selectedFeelings={selectedFeelings} />;
+        case 3:
+          return <Step3 selectedFeelings={selectedFeelings} thisOrThat={thisOrThat}/>;
+        case 4:
+          return <Step4 selectedFeeling={selectedFeelings}/>;
+        default:
+          return (
+            <Step1
+              currentFeeling={currentFeeling}
+              select={select}
+              discard={discard}
+              reconsider={reconsider}
+            />
+          );
+      }
+    };
+    
 
   return (
     <>
-        <>
-          <h1>How are you feeling?</h1>
-          <div>
-            <h3>{currentFeeling}</h3>
-          </div>
-          <button onClick={selectFeeling}>Yes</button>
-          <button onClick={reconsiderFeeling}>Maybe</button>
-          <button onClick={discardFeeling}>No</button>
-        </>
- 
- 
+    <div>
+      {renderStep()}
+    </div>
+  
+       
+
     </>
   );
 };
