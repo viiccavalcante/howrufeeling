@@ -1,5 +1,38 @@
 //colocar animação quando selecionar, talvez colocar tempo
 import { useState, useEffect } from "react";
+import { styled } from "styled-components";
+
+const DivThisOrThat = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+`;
+
+const LeftFeeling = styled.div`
+     flex: 1; 
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #96add6;
+  border: 1px solid #ddd; 
+  padding: 20px; 
+`;
+
+const RightFeeling = styled.div`
+  flex: 1;
+  background: #96add6; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: 1px solid #ddd; 
+  padding: 20px;
+`;
+
+const Option = styled.h2`
+  font-weight: bold;
+`;
 
 const Step3 = ({selectedFeelings, thisOrThat}) => {
   const [leftFeeling, setLeftFeeling] = useState(null);
@@ -13,37 +46,18 @@ const Step3 = ({selectedFeelings, thisOrThat}) => {
   }, [selectedFeelings]);
 
   return (
-    <div style={styles.container}>
-      <div style={styles.left} onClick={() => thisOrThat(rightFeeling)}>
-        <p>{leftFeeling}</p>
-      </div>
-      <div style={styles.right} onClick={() => thisOrThat(leftFeeling)}>
-        <p>{rightFeeling}</p>
-      </div>
-    </div>
+    <>
+      <DivThisOrThat>
+        <LeftFeeling onClick={() => thisOrThat(rightFeeling)}>
+          <Option>{leftFeeling}</Option>
+        </LeftFeeling>
+        <RightFeeling onClick={() => thisOrThat(leftFeeling)}>
+          <Option>{rightFeeling}</Option>
+        </RightFeeling>
+      </DivThisOrThat>
+    </>
   );
 };
-
-const styles = {
-  container: {
-    display: "flex",
-    height: "100vh", 
-  },
-  left: {
-    flex: 1, 
-    backgroundColor: "#f0f0f0",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  right: {
-    flex: 1, 
-    backgroundColor: "#e0e0e0", 
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-};
   
-  export default Step3;
+export default Step3;
   

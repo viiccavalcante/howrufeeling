@@ -2,7 +2,7 @@ import { createGlobalStyle, styled } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     body {
-        background: white;
+        background: #e8e8e8;
         font-family: sans-serif;
     }
 `;
@@ -11,9 +11,10 @@ const Card = styled.div`
     top: 50%;          
     left: 50%;           
     transform: translate(-50%, -50%);
-    background: #e8e4c7;
-    max-width: 500px;
+    background: white;
     margin: 0 auto 100px;
+    width: 500px;
+    height: 400px;
     padding: 45px;
     text-align: center;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.24);
@@ -27,11 +28,12 @@ const Title = styled.h1`
 
 //#577c8e;
 const Button = styled.button`
-    background: ${(props) => props.color || '#97B770'};  /* Agora usa a cor passada como prop */
+    background: white;
     font-weight: bold;
-    color: white;
+    color: ${(props) =>  props.color || '#608334'};
     outline: 0;
-    border-radius: 7px;
+    border: 3px solid ${(props) =>  props.color || '#608334'}; 
+    border-radius: 10px;
     padding: 10px 30px;
     font-size: 17px;
     transition: all 0.3s ease;
@@ -41,6 +43,8 @@ const Button = styled.button`
     &:active,
     &:focus {
         background: ${(props) => props.secondColor || '#608334'};
+        border-color: ${(props) => props.secondColor || '#608334'};
+        color: white;
     }
 `;
 
