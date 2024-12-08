@@ -27,7 +27,7 @@ function Step1({ currentFeeling, select, discard, reconsider }) {
   return (
     <>
       <Container>
-        <Title>How are you feeling?</Title>
+        <Title>How does this situation make you feel?</Title>
         <motion.div
           key={currentFeeling} 
           initial={{ opacity: 0 }}     

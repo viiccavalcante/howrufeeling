@@ -9,10 +9,15 @@ import {
 } from "./components";
 
 const App = () => {
-  const feelings =["Joy", "Excitement", "Love", "Gratitude", "Contentment",
-    "Pride", "Hope", "Curiosity", "Peace", "Inspiration",
-    "Confidence", "Enthusiasm", "Relief", "Amusement",
-    "Awe", "Optimism", "Compassion", "Satisfaction"];
+  const feelings =["Happy", "Sad", "Angry", "Anxious", "Excited", "Nervous",
+    "Confident", "Frustrated", "Hopeful", "Disappointed",
+    "Grateful", "Overwhelmed", "Relieved", "Proud", "Embarrassed",
+    "Confused", "Lonely","Joyful", "Ashamed", "Calm", "Determined",
+    "Stressed", "Fearful","Energetic","Satisfied", "Curious",
+    "Tense", "Helpless", "Powerful", "Guilty","Inspired", "Indifferent",
+    "Irritated", "Optimistic", "Resentful", "Secure", "Surprised", "Worried",
+    "Hopeful", "Relaxed", "Regretful", "Accepted", "Enthusiastic","Vulnerable",
+    "Distracted", "Resigned", "Affectionate", "Passionate", "Compassionate", "Content"];
 
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedFeelings, setSelectedFeelings] = useState([]);
@@ -20,7 +25,14 @@ const App = () => {
   const [currentFeeling, setCurrentFeeling] = useState(activeFeelings[0]);
 
   useEffect(() => {
-    if (activeFeelings.length === 0 ) {
+
+    if (activeFeelings.length > 0) {
+      const position = Math.floor(Math.random() * activeFeelings.length);
+      const newFeeling = activeFeelings[position];
+      setCurrentFeeling(newFeeling);
+      
+    } else {
+
       if(currentStep === 1){
         setCurrentStep(2);
       }
@@ -34,11 +46,6 @@ const App = () => {
   const nextStep = () => {
     setCurrentStep((prevStep) => Math.min(prevStep + 1, 5));
   };
-    
-  const generateFeeling = () => {
-    const position = Math.floor(Math.random() * activeFeelings.length);
-    setCurrentFeeling(activeFeelings[position]);
-  };
 
   const removeFeeling = () => {
     setActiveFeelings(activeFeelings.filter(item => item !== currentFeeling));
@@ -46,25 +53,23 @@ const App = () => {
 
   const select = () => {
     setSelectedFeelings([...selectedFeelings, currentFeeling]); 
-    removeFeeling();
-    generateFeeling();
+    removeFeeling();    
   };
 
   const discard = () => {
     removeFeeling();
-    generateFeeling();
   };
 
   const reconsider = () => {
-    generateFeeling();
+    const position = Math.floor(Math.random() * activeFeelings.length);
+    const newFeeling = activeFeelings[position];
+    setCurrentFeeling(newFeeling);
   };
 
   const thisOrThat = (discardedFeeling) =>{
     setSelectedFeelings(selectedFeelings.filter(item => item !== discardedFeeling));
   };
 
-    //console.log(activeFeelings);
-    console.log(selectedFeelings);
   const renderStep = () => {
     switch (currentStep) {
       case 2:

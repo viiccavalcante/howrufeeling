@@ -8,7 +8,7 @@ const Feeling = styled(motion.h2)`
 `;
 
 const ScrollDiv = styled.div`
-  max-height: 250px; 
+  max-height: 200px; 
   overflow-y: auto; 
   padding: 10px;
   border: 1px solid #ddd; 
@@ -20,7 +20,7 @@ const Step2  = ({ selectedFeelings, onNext }) => {
 
   return (
     <>
-      <Title>You may be feeling:</Title>
+      <Title>You may be feeling one or more of these emotions:</Title>
       <ScrollDiv>
         {selectedFeelings.map((feeling, index) => (
           <Feeling
